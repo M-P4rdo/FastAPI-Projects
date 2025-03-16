@@ -1,0 +1,39 @@
+#Archivos de Python
+*.pyc
+*.pyo
+__pycache__/
+*.log
+
+#Entorno virtual
+venv/
+.env
+.env.local
+*.sqlite3
+
+#Configuración de IDEs y editores de código
+.vscode/
+.idea/
+*.swp
+*.swo
+
+#Archivos de bases de datos y migraciones
+migrations/
+alembic/versions/
+
+#Dependencias instaladas
+pip-log.txt
+pip-delete-this-directory.txt
+
+#Cache de Python y otros archivos temporales
+.DS_Store
+Thumbs.db
+
+#Claves y configuraciones sensibles
+.env
+/secrets/
+config.json
+
+#Archivos generados por compilación
+build/
+dist/
+*.egg-info/
