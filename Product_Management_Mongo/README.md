@@ -1,21 +1,19 @@
-# 🚀 User Management with FastAPI
+# 🚀 Product Management with FastAPI
 
-This project is a REST API for user management, implemented with **FastAPI**, JWT authentication and **PostgreSQL**. It includes user CRUD and secure authentication with JWT tokens.
+This project is a REST API for product management, implemented with **FastAPI** and **MongoDB**. It includes Product CRUD.
 
 ## Technologies used
 
 - **FastAPI** - Modern and fast web framework.
-- **PostgreSQL** - Relational database.
-- **SQLAlchemy** - ORM to interact with PostgreSQL.
-- **Alembic** - Database migrations.
-- **JWT (JSON Web Tokens)** - For secure authentication.
-- **bcrypt** - Password cracking.
+- **MongoDB** - NoSQL database
+- **Motor** - Asynchronous client for MongoDB
+- **Pydantic** - Data validation
 
 
 ## Installation
 
 ### Clone repository
-git clone --single-branch --branch User_Management_Postgres https://github.com/M-P4rdo/FastAPI-Projects.git  
+git clone --single-branch --branch Product_Management_Mongo https://github.com/M-P4rdo/FastAPI-Projects.git  
 cd FastAPI-Projects.git
 
 ### Create a virtual environment and install dependencies
@@ -23,8 +21,7 @@ Create virtual environment (.venv)
 Activate virtual environment
 
 ### Install dependencies
-pip install -r requirements.txt  
-pip install --upgrade passlib
+pip install -r requirements.txt 
 
 
 ## Database Configuration
@@ -33,14 +30,11 @@ pip install --upgrade passlib
 MONGO_URL=mongodb://localhost:27017
 DB_NAME=product_management 
 
-### **2. Execute database migrations**  
-alembic revision --autogenerate -m "create users table"   
-alembic upgrade head 
+### **2. Start MongoDB**  
+Open the Command Prompt terminal and run (mongod)
+Open a new Command Prompt terminal and run (mongosh)
 
-Open the alembic.ini file and edit the line:  
-(sqlalchemy.url) = postgresql://user:password@localhost/db_name
-
-### **3. (Optional) Insert test users**  
+### **3. (Optional) Insert test products**  
 python seed.py  
 
 
@@ -51,62 +45,48 @@ The API will be available in **'http://127.0.0.1:8000'**.
 
 ## Main Endpoints  
 
-### Authentication
-| Method | Endpoint       | Description                |
-|--------|----------------|----------------------------|
-| 'POST' | '/auth/login'  | Log in and get JWT token   |
-
-### **Usuarios**
+### **Products**
 | Method | Endpoint       | Description            |
 |--------|----------------|------------------------|
-| 'POST' | '/users/'      | Create a new user      |
-| 'GET'  | '/users/'      | List users (requires authentication)      |   
-| 'GET'  | '/users/{id}'  | Get a user by ID (requires authentication)|
-| 'PUT'  | '/users/{id}'  | Update a user (requires authentication)   |
-| 'DELETE' | '/users/{id}' | Delete a user (requires authentication)  | 
+| 'POST' | '/products/'      | Create a new product     |
+| 'GET'  | '/products/'      | List products            |   
+| 'GET'  | '/products/{id}'  | Get a product by ID      |
+| 'PUT'  | '/products/{id}'  | Update a product         |
+| 'DELETE' | '/products/{id}' | Delete a product        | 
 
 
 ## Testing at Postman
 
-### Get Authentication Token  
+### User Endpoints 
+  
 **Create User**  
 **Method:** 'POST'  
-**URL:** 'http://localhost:8000/users/'  
+**URL:** 'http://127.0.0.1:8000/products/'  
 **Body (raw):** JSON  
 {  
-  "username": "-----",  
-  "email": "-----@example.com",  
-  "password": "-----"  
-} 
-
-**Method:** 'POST'  
-**URL:** 'http://localhost:8000/auth/login'   
-**Body (raw):** JSON  
-{  
-  "email": "-----",  
-  "password": "-----"  
+  "name": "-----",  
+  "price": -----,  
+  "category": "-----",  
+  "description": "-----"  
 }  
-**Save the Token** for future requests.   
-
-### User Endpoints  
-**Add 'Authorization: Bearer <TOKEN>' in the protected requests.**  
 
 **List Users**  
-**Method:** 'GET' **URL:** 'http://localhost:8000/users/'  
-
+**Method:** 'GET' **URL:** 'http://127.0.0.1:8000/products/'  
+  
 **Get User by ID**  
-**Method:** 'GET' **URL:** 'http://localhost:8000/users/{user_id}'   
+**Method:** 'GET' **URL:** 'http://127.0.0.1:8000/products/{product_id}'   
 
 **Delete User**  
-**Method:** 'DELETE' **URL:** 'http://localhost:8000/users/{user_id}'  
+**Method:** 'DELETE' **URL:** 'http://127.0.0.1:8000/products/{product_id}'  
 
 **Update User**  
-**Method:** 'PUT' **URL:** 'http://localhost:8000/users/{username}'  
+**Method:** 'PUT' **URL:** 'http://127.0.0.1:8000/products/{product_id}'  
 **Body (raw):** JSON  
 {  
-  "username": "-----",  
-  "email": "-----@example.com",  
-  "password": "-----"  
+  "name": "-----",  
+  "price": -----,  
+  "category": "-----",  
+  "description": "-----"  
 }  
 
 **The interactive API documentation is available at**  
